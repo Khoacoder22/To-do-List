@@ -7,7 +7,7 @@ enum Gender {
 //To-do-list status
 enum TodoListStatus {
     Unfinished = "unfinished",
-    finished = "finished",
+    Finished = "finished",
 }
 
 //Status for TodoItem

@@ -18,8 +18,8 @@ export const createTodolistItemHanlder = async(req: Request, res: Response, next
 export const getTodolistItemsHanlder = async(req: Request, res: Response, next: NextFunction) => {
    
     try {
-        const {to_do_group_id} = req.params;
-        const items = await  TodoListItemsService.getTodolistItems(to_do_group_id);
+        const { id } = req.params; 
+        const items = await  TodoListItemsService.getTodolistItems(id);
         res.json(items);
 
     } catch(error : any){
