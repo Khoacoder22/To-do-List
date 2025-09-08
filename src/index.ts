@@ -3,9 +3,7 @@ import dotenv from "dotenv";
 import { connectDb } from "./configs/db";
 
 //routes
-import todoRoute from "../src/routes/todoRoute";
-import todoListRoute from "../src/routes/todoListRoute";
-import UserRoute from "../src/routes/UserRoute";
+import indexRouter from "../src/routes/indexRouter";
 
 import { errorHandler } from "./middlewares/AppError";
 
@@ -25,9 +23,7 @@ app.use(express.json());
 connectDb();
 
 //routes
-app.use("/api/todoitems", todoRoute);
-app.use("/api/todo", todoListRoute);
-app.use("/api/user", UserRoute);
+app.use("/api", indexRouter);
 
 //middle ware
 app.use(errorHandler);
