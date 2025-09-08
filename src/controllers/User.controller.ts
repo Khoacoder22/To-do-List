@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as UserService from "../services/UserService";
+import * as UserService from "../services/User.Service";
 import {Gender} from "../enum/enum";
 
 //Tao User

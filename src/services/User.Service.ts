@@ -1,6 +1,4 @@
-import { NextFunction } from "express";
 import {User, IUser} from "../models/User";
-import {} from "../enum/enum";
 
 //Lay User 
 const getAllUser = async () : Promise<IUser[]> => {

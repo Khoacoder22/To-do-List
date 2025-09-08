@@ -7,8 +7,6 @@ import indexRouter from "../src/routes/indexRouter";
 
 import { errorHandler } from "./middlewares/AppError";
 
-import { setupSwagger } from "./configs/swagger";
-
 
 const app = express();
 
@@ -27,9 +25,6 @@ app.use("/api", indexRouter);
 
 //middle ware
 app.use(errorHandler);
-
-//swagger docs
-setupSwagger(app);
 
 //listen trên server 3000
 app.listen(port, () => {
