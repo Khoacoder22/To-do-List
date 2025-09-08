@@ -36,6 +36,7 @@ const updateTodolistItem = async (
   id: string,
   updateData: Partial<ITodoItem>
 ): Promise<ITodoItem> => {
+
   const updateItem = await TodoItem.findByIdAndUpdate(id, updateData, {
     new: true,
     runValidators: true,
@@ -49,6 +50,7 @@ const updateTodolistItem = async (
   await UpdateTodoList(updateItem.to_do_group_id.toString(), "");
 
   return updateItem;
+  
 };
 
 // Delete item + cập nhật list cha

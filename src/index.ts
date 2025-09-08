@@ -1,9 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDb } from "./configs/db";
+
+//routes
 import todoRoute from "../src/routes/todoRoute";
-import todoListRoute from "../src/routes/todoListRoute"
+import todoListRoute from "../src/routes/todoListRoute";
+import UserRoute from "../src/routes/UserRoute";
+
 import { errorHandler } from "./middlewares/AppError";
+
+import { setupSwagger } from "./configs/swagger";
+
 
 const app = express();
 
@@ -20,13 +27,17 @@ connectDb();
 //routes
 app.use("/api/todoitems", todoRoute);
 app.use("/api/todo", todoListRoute);
-
+app.use("/api/user", UserRoute);
 
 //middle ware
 app.use(errorHandler);
 
+//swagger docs
+setupSwagger(app);
+
 //listen trên server 3000
 app.listen(port, () => {
     console.log(`The server is running on ${port}`);
+    console.log("Swagger docs on http://localhost:3000/docs");
 })
 

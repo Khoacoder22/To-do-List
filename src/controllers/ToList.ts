@@ -1,10 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import * as TodoListService from "../services/ToListService";
 
 //tạo item
-export const createTodolistHanlder = async(req: Request, res: Response, next: NextFunction) => {
+export const createTodolistHanlder = async(req: Request, res: Response) => {
     try{
-        const {name, user_id} = req.body;
+        const { user_id } = req.params;
+        const {name} = req.body;
         const newTodo = await TodoListService.createTodoList(name, user_id);
         res.status(201).json(newTodo);
     }
@@ -14,10 +15,10 @@ export const createTodolistHanlder = async(req: Request, res: Response, next: Ne
 }
 
 //lấy items
-export const getTodohandler = async(req: Request, res: Response, next: NextFunction) => {
-    try{
-        const items = await TodoListService.getAllTodoListsByUser(req.params.id);
-        res.json(items);
+export const getTodohandler = async(req: Request, res: Response) => {
+    try{    
+        const todoList = await TodoListService.getAllTodoListsByUser(req.params.id);
+        res.json(todoList);
     }
     catch(error : any){
         res.status(400).json({message: error.message});
@@ -25,7 +26,7 @@ export const getTodohandler = async(req: Request, res: Response, next: NextFunct
 }
 
 // xóa item
-export const deleteTodoHandler = async(req: Request, res: Response, next: NextFunction) => {
+export const deleteTodoHandler = async(req: Request, res: Response ) => {
     try{
         const deleted = await TodoListService.deleteTodoList(req.params.id);
         if(!deleted){
@@ -38,7 +39,7 @@ export const deleteTodoHandler = async(req: Request, res: Response, next: NextFu
 }
 
 //update item
-export const updateHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const updateHandler = async (req: Request, res: Response) => {
     try {
         const updateTodo = await TodoListService.UpdateTodoList(req.params.id, req.body.name);
         res.json(updateTodo)     

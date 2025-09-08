@@ -9,8 +9,11 @@ export const createTodolistItemHanlder = async(req: Request, res: Response, next
         const {name, des, due_at} = req.body;
         const newItems = await TodoListItemsService.createTodolistItem(name, des, new Date(due_at), to_do_group_id);
         res.status(201).json(newItems);
+
     } catch (error : any){
+
         res.status(400).json({message: error.message});
+
     }
 };
 
@@ -18,8 +21,9 @@ export const createTodolistItemHanlder = async(req: Request, res: Response, next
 export const getTodolistItemsHanlder = async(req: Request, res: Response, next: NextFunction) => {
    
     try {
+
         const { id } = req.params; 
-        const items = await  TodoListItemsService.getTodolistItems(id);
+        const items = await TodoListItemsService.getTodolistItems(id);
         res.json(items);
 
     } catch(error : any){
