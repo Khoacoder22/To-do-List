@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './configs/swagger';
 
 //routes
-import indexRouter from "./routes";
+import index from "./routes/index";
 
 import { errorHandler } from "./middlewares/AppError";
 
@@ -26,7 +26,7 @@ connectDb();
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //routes
-app.use("/api", indexRouter);
+app.use("/api", index);
 
 //middle ware
 app.use(errorHandler);

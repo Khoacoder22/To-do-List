@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as UserService from "../services/User.Service";
+import * as UserService from "../services/user.service";
 import {Gender} from "../enum/enum";
 
 //Tao User
@@ -14,33 +14,48 @@ export const createUser = async(req: Request, res: Response) => {
         const newUser = await UserService.createUser(name, gender, dob);
         return res.status(201).json(newUser);
     } catch(error: any){
-        res.json({ message: error});
+        return res.status(500).json({
+            message: error.message || "System error"
+        });
     }
 }
 
 // Lấy User 
 export const getAllUser = async(req: Request, res: Response) => {
+
     try{
         const userList = await UserService.getAllUser();
         res.status(200).json(userList);
     }
+    
     catch( error : any){
-        res.status(500).json({message: error.message});
+        return res.status(500).json({
+            message: error.message || "System error"
+        });
     }
+
 }
 
 //Delete User
-export const deleteUser = async(req: Request, res: Response) => {
-    try{
+export const deleteUser = async (req: Request, res: Response) => {
+    try {
         const deleted = await UserService.deleteUser(req.params.id);
-        if(!deleted){
-            res.status(404).json({message: "User not found"});
+
+        if (!deleted) {
+            return res.status(404).json({ message: "User not found" });
         }
-        res.json({message: "User deleted", deleted});
-    } catch (error: any){
-        res.json({message : error});
+
+        return res.json({
+            message: "User deleted",
+            deleted
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            message: error.message || "System error"
+        });
     }
-}
+};
+
 
 //Update User
 export const updateUser = async(req: Request, res: Response) => {
@@ -55,11 +70,14 @@ export const updateUser = async(req: Request, res: Response) => {
         const updated = await UserService.updateUser(req.params.id, req.body);
         
         if (!updated) {
-            res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "User not found" });
+        } else {
+            return res.status(200).json(updated);
         }
 
-        res.status(200).json(updated);
     } catch(error: any){
-        res.json({ message: error.message });
+        return res.status(500).json({
+            message: error.message || "System error"
+        });
     }
 }

@@ -1,6 +1,6 @@
 import { TodoItem, ITodoItem } from "../models/TodoItem";
 import { TodoList } from "../models/TodoList";
-import { UpdateTodoList } from "./ToDoList.Service";
+import { UpdateTodoList } from "./to-do-list.service";
 
 // Tạo To do list items
 const createTodolistItem = async (

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as TodoListService from "../services/ToDoList.Service";
+import * as TodoListService from "../services/to-do-list.service";
 
 //tạo item
 export const createTodolistHanlder = async(req: Request, res: Response) => {
@@ -7,10 +7,10 @@ export const createTodolistHanlder = async(req: Request, res: Response) => {
         const { user_id } = req.params;
         const {name} = req.body;
         const newTodo = await TodoListService.createTodoList(name, user_id);
-        res.status(201).json(newTodo);
+        return res.status(201).json(newTodo);
     }
     catch(error : any){
-        res.status(400).json({message: error.message});
+        return res.status(400).json({message: error.message});
     }
 }
 
