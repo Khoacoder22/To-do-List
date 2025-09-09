@@ -1,9 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDb } from "./configs/db";
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDocs } from './configs/swagger';
 
 //routes
-import indexRouter from "../src/routes/indexRouter";
+import indexRouter from "./routes";
 
 import { errorHandler } from "./middlewares/AppError";
 
@@ -19,6 +21,9 @@ app.use(express.json());
 
 //load database
 connectDb();
+
+//swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //routes
 app.use("/api", indexRouter);

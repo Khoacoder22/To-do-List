@@ -6,7 +6,7 @@ const components = loadAllYAMLFromDir('../docs');
 const server_url = process.env.SERVER_URL ?? 'http://localhost:3000'
 
 export const swaggerOptions: Options = {
-  swaggerDefinition: {
+  definition: {
     openapi: '3.0.0',
     info: {
       title: 'ExpressJS Template',
